@@ -14,7 +14,8 @@ export class TaskManagerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.getKeys()
+    this.getTasks()
+    console.log(this.listOfTasks)
   }
 
   createTask(inputText:string){
