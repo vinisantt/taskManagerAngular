@@ -1,57 +1,95 @@
 <main role="main">
-        <div class="container">
+  <div class="container">
+    <h1 class="col pb-2">Tarefas</h1>
+    <br />
 
-            <h1 class="col pb-2">Tarefas</h1> <br />
-
-            <div class="pb-4">
-                <div class="d-flex justify-content-between">
-                    <div class="col-md-6 input-group md-form">
-                        <input
-                            type="text"
-                            id="task_name"
-                            name="task_name"
-                            class="form-control"
-                            placeholder="Nome da tarefa"
-                        />
-                        <div class="input-group-append">
-                            <button id="btn_salvar" class="btn btn-dark btn-block" title="Salvar">
-                                Salvar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-auto">
-                        <button id="delete_task_list" class="col-md-auto btn btn-outline-secondary">
-                            Limpar Lista
-                        </button>
-                    </div>
-                </div>
-            </div> <br />
-
-            <div id="div_table" class="col pb-4">
-                <table id="tabela_tarefa" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="text-left">Entrega</th>
-                            <th class="text-center">Nome</th>
-                            <th class="text-center">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let task of listOfTasks">
-                            <td *ngIf = "task.isFinished == false; else dateStrikedOut">{{task.date}}</td>
-                            <ng-template #dateStrikedOut>
-                                <td><s>{{task.date}}</s></td>
-                            </ng-template>
-                            <td *ngIf = "task.isFinished == false; else nameStrikedOut">{{task.name}}</td>
-                            <ng-template #nameStrikedOut>
-                                <td><s>{{task.name}}</s></td>
-                            </ng-template>
-                            <td>{{task.isFinished}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+    <div class="pb-4">
+      <div class="d-flex justify-content-between">
+        <div class="col-md-6 input-group md-form">
+          <input
+            type="text"
+            id="task_name"
+            name="task_name"
+            class="form-control"
+            placeholder="Nome da tarefa"
+            (input)="this.inputText = $event.target.value"
+          />
+          <div class="input-group-append">
+            <button
+              id="btn_salvar"
+              class="btn btn-dark btn-block"
+              title="Salvar"
+              (click)="createTask(this.inputText)"
+            >
+              Salvar
+            </button>
+          </div>
         </div>
-    </main>
+
+        <div class="col-md-auto">
+          <button
+            id="delete_task_list"
+            class="col-md-auto btn btn-outline-secondary"
+            (click)="removeAllTasks()"
+          >
+            Limpar Lista
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <div id="div_table" class="col pb-4">
+      <table id="tabela_tarefa" class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">Entrega</th>
+            <th class="text-center">Nome</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of listOfTasks">
+            <td *ngIf="task.isFinished == false; else dateStrikedOut">
+              {{ task.date.slice(0, 5) }}
+            </td>
+            <ng-template #dateStrikedOut>
+              <td>
+                <s>{{ task.date.slice(0, 5) }}</s>
+              </td>
+            </ng-template>
+            <td *ngIf="task.isFinished == false; else nameStrikedOut">
+              {{ task.name }}
+            </td>
+            <ng-template #nameStrikedOut>
+              <td>
+                <s>{{ task.name }}</s>
+              </td>
+            </ng-template>
+            <td *ngIf="task.isFinished == false; else noActions">
+              <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="finishTask(task.id)"
+                >
+                  <li class="fas fa-check"></li>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeTask(task.id)"
+                >
+                  <li class="fas fa-trash-alt"></li>
+                </button>
+              </div>
+            </td>
+            <ng-template #noActions>
+              <td></td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
