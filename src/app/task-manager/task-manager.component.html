@@ -39,8 +39,15 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let task of listOfTasks">
-                            <td>{{task.date}}</td>
-                            <td>{{task.name}}</td>
+                            <td *ngIf = "task.isFinished == false; else dateStrikedOut">{{task.date}}</td>
+                            <ng-template #dateStrikedOut>
+                                <td><s>{{task.date}}</s></td>
+                            </ng-template>
+                            <td *ngIf = "task.isFinished == false; else nameStrikedOut"><td>{{task.name}}</td>
+                            <ng-template #nameStrikedOut>
+                                <td><s>{{task.date}}</s></td>
+                            </ng-template>
+                            
                             <td>{{task.isFinished}}</td>
                         </tr>
                     </tbody>
