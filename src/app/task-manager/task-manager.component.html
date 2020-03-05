@@ -37,7 +37,13 @@
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <tr *ngFor="let task of listOfTasks">
+                            <td>{{task.date}}</td>
+                            <td>{{task.name}}</td>
+                            <td>{{task.isFinished}}</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
