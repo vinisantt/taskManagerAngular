@@ -1,0 +1,45 @@
+<main role="main">
+        <div class="container">
+
+            <h1 class="col pb-2">Tarefas</h1> <br />
+
+            <div class="pb-4">
+                <div class="d-flex justify-content-between">
+                    <div class="col-md-6 input-group md-form">
+                        <input
+                            type="text"
+                            id="task_name"
+                            name="task_name"
+                            class="form-control"
+                            placeholder="Nome da tarefa"
+                        />
+                        <div class="input-group-append">
+                            <button id="btn_salvar" class="btn btn-dark btn-block" title="Salvar">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-auto">
+                        <button id="delete_task_list" class="col-md-auto btn btn-outline-secondary">
+                            Limpar Lista
+                        </button>
+                    </div>
+                </div>
+            </div> <br />
+
+            <div id="div_table" class="col pb-4">
+                <table id="tabela_tarefa" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Entrega</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
